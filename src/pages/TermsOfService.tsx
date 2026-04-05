@@ -9,7 +9,7 @@ const TermsOfService = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto max-w-3xl px-6 py-16">
         <h1 className="text-3xl font-display font-bold text-foreground mb-8">Terms of Service</h1>
-        <p className="text-sm text-muted-foreground mb-8">Last updated: February 15, 2026</p>
+        <p className="text-sm text-muted-foreground mb-8">Last updated: Jan 24, 2026</p>
         <div className="prose prose-sm dark:prose-invert max-w-none space-y-6 text-muted-foreground">
           <section>
             <h2 className="text-xl font-semibold text-foreground">1. Acceptance of Terms</h2>

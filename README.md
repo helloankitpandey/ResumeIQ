@@ -7,8 +7,7 @@ ResumeIQ is a modern, AI-powered web application that helps job seekers create *
 
 ## 🌐 Live Demo
 
-- **Live Website:**  
-- **Custom Domain:** 
+- **Live Website:**  https://resumeiq-by-ankit.vercel.app/
 - **Local Development URL:** http://localhost:8080  
 
 ---
@@ -253,9 +252,9 @@ npm run dev
 - **Status:** Submitted for verification
 - **Scopes:** email, profile, openid
 - **Consent Screen:** ResumeIQ branding
-- **Homepage URL:** 
-- **Privacy Policy URL:** 
-- **Terms of Service URL:** 
+- **Homepage URL:** https://resumeiq-by-ankit.vercel.app/
+- **Privacy Policy URL:** https://resumeiq-by-ankit.vercel.app/privacy
+- **Terms of Service URL:** https://resumeiq-by-ankit.vercel.app/terms
 
 ### Email Services
 - **Password Reset:** SendGrid SMTP
