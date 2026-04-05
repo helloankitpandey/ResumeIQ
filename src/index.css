@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ResumeIQ Design System — Premium Dark Purple */
+
+@layer base {
+  :root {
+    /* Light mode — Clean & Professional */
+    --background: 240 10% 96%;
+    --foreground: 240 10% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 8%;
+
+    /* Rich violet primary */
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Soft violet secondary */
+    --secondary: 260 20% 94%;
+    --secondary-foreground: 262 60% 45%;
+
+    --muted: 240 10% 92%;
+    --muted-foreground: 240 5% 46%;
+
+    /* Electric violet accent */
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 10% 88%;
+    --input: 240 10% 88%;
+    --ring: 262 83% 58%;
+
+    --radius: 0.75rem;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --glow: 262 83% 58%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(280 80% 55%) 50%, hsl(262 83% 68%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(240 10% 97%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(262 83% 58%) 0%, hsl(280 80% 55%) 100%);
+
+    --shadow-sm: 0 1px 2px 0 hsl(240 10% 8% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(240 10% 8% / 0.08), 0 2px 4px -2px hsl(240 10% 8% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(240 10% 8% / 0.1), 0 4px 6px -4px hsl(240 10% 8% / 0.08);
+    --shadow-xl: 0 20px 25px -5px hsl(240 10% 8% / 0.1), 0 8px 10px -6px hsl(240 10% 8% / 0.08);
+    --shadow-glow: 0 0 40px hsl(262 83% 58% / 0.25);
+
+    --sidebar-background: 240 10% 97%;
+    --sidebar-foreground: 240 5% 30%;
+    --sidebar-primary: 262 83% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 10% 94%;
+    --sidebar-accent-foreground: 240 5% 30%;
+    --sidebar-border: 240 10% 90%;
+    --sidebar-ring: 262 83% 58%;
+  }
+
+  .dark {
+    /* Dark mode — Premium dark like jobbie.io */
+    --background: 240 15% 5%;
+    --foreground: 240 10% 95%;
+
+    --card: 240 15% 8%;
+    --card-foreground: 240 10% 95%;
+
+    --popover: 240 15% 8%;
+    --popover-foreground: 240 10% 95%;
+
+    /* Bright violet primary */
+    --primary: 262 83% 62%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 15% 12%;
+    --secondary-foreground: 240 10% 90%;
+
+    --muted: 240 15% 12%;
+    --muted-foreground: 240 10% 55%;
+
+    /* Electric violet accent */
+    --accent: 262 83% 62%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 15% 14%;
+    --input: 240 15% 14%;
+    --ring: 262 83% 62%;
+
+    --glow: 262 83% 62%;
+
+    --sidebar-background: 240 15% 6%;
+    --sidebar-foreground: 240 10% 90%;
+    --sidebar-primary: 262 83% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 15% 10%;
+    --sidebar-accent-foreground: 240 10% 90%;
+    --sidebar-border: 240 15% 12%;
+    --sidebar-ring: 262 83% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-hero);
+  }
+
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+
+  .bg-gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Glowing border utility */
+  .glow-border {
+    position: relative;
+    box-shadow: 0 0 8px hsl(var(--glow) / 0.3), 0 0 20px hsl(var(--glow) / 0.1), inset 0 0 8px hsl(var(--glow) / 0.05);
+    border-color: hsl(var(--glow) / 0.5);
+  }
+
+  .glow-border:hover {
+    box-shadow: 0 0 12px hsl(var(--glow) / 0.5), 0 0 30px hsl(var(--glow) / 0.15), inset 0 0 12px hsl(var(--glow) / 0.08);
+    border-color: hsl(var(--glow) / 0.7);
+  }
+
+  .glow-border-accent {
+    box-shadow: 0 0 8px hsl(var(--accent) / 0.3), 0 0 20px hsl(var(--accent) / 0.1);
+    border-color: hsl(var(--accent) / 0.5);
+  }
+
+  .glow-border-accent:hover {
+    box-shadow: 0 0 12px hsl(var(--accent) / 0.5), 0 0 30px hsl(var(--accent) / 0.15);
+    border-color: hsl(var(--accent) / 0.7);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Print styles for resume */
+@media print {
+  @page {
+    size: letter;
+    margin: 0;
+  }
+
+  html, body {
+    width: 8.5in;
+    height: 11in;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: white !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+
+  .print-resume {
+    width: 8.5in !important;
+    min-height: 11in !important;
+    max-height: 11in !important;
+    overflow: hidden !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    background: white !important;
+  }
+}
