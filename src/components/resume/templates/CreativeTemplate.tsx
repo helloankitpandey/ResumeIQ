@@ -13,7 +13,14 @@ interface Props {
 }
 
 const CreativeTemplate = ({ resumeData, sectionOrder }: Props) => {
-  const { personalInfo, experience, projects, education, skills } = resumeData;
+  // const { personalInfo, experience, projects, education, skills } = resumeData;
+  const {
+    personalInfo,
+    experience = [],
+    projects = [],   // 🔥 FIX
+    education = [],
+    skills = [],
+  } = resumeData || {};
 
   return (
     <div className="flex min-h-full" style={{ fontFamily: "'Poppins', 'Helvetica Neue', sans-serif", fontSize: "10pt", lineHeight: "1.4" }}>
@@ -129,7 +136,7 @@ const CreativeTemplate = ({ resumeData, sectionOrder }: Props) => {
                   )}
 
                   {/* Description */}
-                  {proj.description.filter((d) => d.trim()).length > 0 && (
+                  {(proj.description || []).filter((d) => d.trim()).length > 0 && (
                     <ul style={{ paddingLeft: "0" }}>
                       {proj.description
                         .filter((d) => d.trim())
