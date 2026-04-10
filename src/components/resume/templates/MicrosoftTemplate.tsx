@@ -14,7 +14,7 @@ interface Props {
 }
 
 const MicrosoftTemplate = ({ resumeData, sectionOrder }: Props) => {
-  const { personalInfo, experience, education, skills } = resumeData;
+  const { personalInfo, experience, projects, education, skills } = resumeData;
 
   return (
     <div
@@ -86,6 +86,65 @@ const MicrosoftTemplate = ({ resumeData, sectionOrder }: Props) => {
             </div>
           );
         }
+
+        if (section === "projects" && projects.length > 0) {
+          return (
+            <div key="projects" style={{ marginBottom: "14pt" }}>
+              <SectionHeader>Projects</SectionHeader>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10pt" }}>
+                {projects.map((proj) => (
+                  <div key={proj.id} style={{ borderLeft: "2px solid #c8e6c9", paddingLeft: "10pt" }}>
+                    
+                    {/* Title + Links */}
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="font-bold" style={{ fontSize: "10.5pt" }}>
+                          {proj.title || "Project Title"}
+                        </span>
+
+                        {/* Tech Stack */}
+                        {proj.techStack && (
+                          <p style={{ color: "#107c41", fontWeight: 500, fontSize: "9.5pt" }}>
+                            {proj.techStack}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Links */}
+                      <span style={{ fontSize: "8.5pt", color: "#666" }}>
+                        {proj.link && (
+                          <a href={proj.link} target="_blank" rel="noreferrer" style={{ marginRight: "6pt", color: "#107c41" }}>
+                            Live
+                          </a>
+                        )}
+                        {proj.github && (
+                          <a href={proj.github} target="_blank" rel="noreferrer" style={{ color: "#107c41" }}>
+                            GitHub
+                          </a>
+                        )}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    {proj.description.filter((d) => d.trim()).length > 0 && (
+                      <ul style={{ marginTop: "4pt", paddingLeft: "0" }}>
+                        {proj.description
+                          .filter((d) => d.trim())
+                          .map((bullet, idx) => (
+                            <li key={idx} className="flex" style={{ marginBottom: "2pt", color: "#333" }}>
+                              <span style={{ color: "#107c41", marginRight: "6pt" }}>▸</span>
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
         if (section === "education" && education.length > 0) {
           return (
             <div key="education" style={{ marginBottom: "14pt" }}>

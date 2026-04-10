@@ -13,7 +13,7 @@ interface Props {
 }
 
 const ExecutiveTemplate = ({ resumeData, sectionOrder }: Props) => {
-  const { personalInfo, experience, education, skills } = resumeData;
+  const { personalInfo, experience, projects, education, skills } = resumeData;
 
   return (
     <div className="bg-white min-h-full" style={{ fontFamily: "'Georgia', 'Palatino', serif", fontSize: "10.5pt", lineHeight: "1.4" }}>
@@ -74,6 +74,62 @@ const ExecutiveTemplate = ({ resumeData, sectionOrder }: Props) => {
               </div>
             );
           }
+
+          if (section === "projects" && projects.length > 0) {
+            return (
+              <div key="projects" style={{ marginBottom: "16pt" }}>
+                <SectionHeader>Key Projects</SectionHeader>
+                <div style={{ display: "flex", flexDirection: "column", gap: "12pt" }}>
+                  {projects.map((proj) => (
+                    <div key={proj.id}>
+
+                      {/* Title + Links */}
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <span className="font-bold" style={{ fontSize: "10.5pt" }}>
+                            {proj.title || "Project Title"}
+                          </span>
+
+                          {/* Tech Stack */}
+                          {proj.techStack && (
+                            <p style={{ color: "#475569", fontWeight: 500, fontSize: "9.5pt" }}>
+                              {proj.techStack}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Links */}
+                        <span style={{
+                          fontSize: "8pt",
+                          color: "#64748b",
+                          background: "#f1f5f9",
+                          padding: "2pt 8pt",
+                          borderRadius: "3pt"
+                        }}>
+                          {[proj.link, proj.github].filter(Boolean).join(" | ")}
+                        </span>
+                      </div>
+
+                      {/* Description */}
+                      {proj.description.filter((d) => d.trim()).length > 0 && (
+                        <ul style={{ marginTop: "4pt", paddingLeft: "0" }}>
+                          {proj.description
+                            .filter((d) => d.trim())
+                            .map((bullet, idx) => (
+                              <li key={idx} className="flex" style={{ marginBottom: "2pt", color: "#444" }}>
+                                <span style={{ marginRight: "6pt", color: "#94a3b8" }}>■</span>
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+
           if (section === "education" && education.length > 0) {
             return (
               <div key="education" style={{ marginBottom: "16pt" }}>

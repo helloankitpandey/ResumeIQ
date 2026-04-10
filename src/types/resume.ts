@@ -18,6 +18,15 @@ export interface PersonalInfo {
   summary: string;
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  techStack: string;
+  link: string;
+  github: string;
+  description: string[];
+}
+
 /** A single work-experience entry */
 export interface Experience {
   id: string;
@@ -46,6 +55,7 @@ export interface Education {
 export interface ResumeData {
   personalInfo: PersonalInfo;
   experience: Experience[];
+  projects: Project[]; 
   education: Education[];
   skills: string[];
 }
@@ -63,6 +73,7 @@ export const defaultResumeData: ResumeData = {
     summary: "",
   },
   experience: [],
+   projects: [],
   education: [],
   skills: [],
 };

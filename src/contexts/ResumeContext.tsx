@@ -18,7 +18,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 import { ResumeData, defaultResumeData, ResumeTemplate } from "@/types/resume";
 
 /** Identifiers for the four re-orderable resume sections */
-export type ResumeSection = "summary" | "experience" | "education" | "skills";
+export type ResumeSection = "summary" | "experience" | "projects" | "education" | "skills";
 
 interface ResumeContextType {
   resumeData: ResumeData;
@@ -38,12 +38,15 @@ interface ResumeContextType {
   setCurrentStep: (step: number) => void;
   sectionOrder: ResumeSection[];
   setSectionOrder: (order: ResumeSection[]) => void;
+  addProject: () => void;
+  updateProject: (id: string, field: string, value: string | string[]) => void;
+  removeProject: (id: string) => void;
 }
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
 
 /** Default ordering of resume body sections */
-const defaultSectionOrder: ResumeSection[] = ["summary", "experience", "education", "skills"];
+const defaultSectionOrder: ResumeSection[] = ["summary", "experience", "projects", "education", "skills"];
 
 export const ResumeProvider = ({ children }: { children: ReactNode }) => {
   const [resumeData, setResumeData] = useState<ResumeData>(defaultResumeData);
@@ -135,6 +138,39 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     }));
   };
 
+  const addProject = () => {
+    const newProject = {
+      id: crypto.randomUUID(),
+      title: "",
+      techStack: "",
+      link: "",
+      github: "",
+      description: [""],
+    };
+
+    setResumeData((prev) => ({
+      ...prev,
+      projects: [...prev.projects, newProject],
+    }));
+  };
+
+  const updateProject = (id: string, field: string, value: string | string[]) => {
+    setResumeData((prev) => ({
+      ...prev,
+      projects: prev.projects.map((proj) =>
+        proj.id === id ? { ...proj, [field]: value } : proj
+      ),
+    }));
+  };
+
+  const removeProject = (id: string) => {
+    setResumeData((prev) => ({
+      ...prev,
+      projects: prev.projects.filter((proj) => proj.id !== id),
+    }));
+  };
+
+
   /* ---------- Skills ---------- */
 
   /** Add a skill if it's non-empty and not already present */
@@ -175,6 +211,9 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
         setCurrentStep,
         sectionOrder,
         setSectionOrder,
+        addProject,
+        updateProject,
+        removeProject,
       }}
     >
       {children}

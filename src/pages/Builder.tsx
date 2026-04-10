@@ -34,8 +34,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Download, FileText, Eye, Save, Loader2 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { defaultResumeData } from "@/types/resume";
+import ProjectForm from "@/components/resume/ProjectForm";
 
-const steps = ["Personal", "Experience", "Education", "Skills", "Template"];
+const steps = ["Personal", "Experience", "Projects", "Education", "Skills", "Template"];
 
 const BuilderContent = () => {
   const { user } = useAuth();
@@ -69,6 +70,7 @@ const BuilderContent = () => {
           setResumeData({
             personalInfo: resume.resume_data.personalInfo || defaultResumeData.personalInfo,
             experience: resume.resume_data.experience || [],
+            projects: resume.resume_data.projects || [],
             education: resume.resume_data.education || [],
             skills: resume.resume_data.skills || [],
           });
@@ -136,10 +138,12 @@ const BuilderContent = () => {
       case 1:
         return <ExperienceForm />;
       case 2:
-        return <EducationForm />;
+        return <ProjectForm />;
       case 3:
-        return <SkillsForm />;
+        return <EducationForm />;
       case 4:
+        return <SkillsForm />;
+      case 5:
         return <TemplateSelector />;
       default:
         return <PersonalInfoForm />;

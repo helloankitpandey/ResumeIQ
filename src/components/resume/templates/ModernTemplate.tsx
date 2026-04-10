@@ -14,7 +14,7 @@ interface Props {
 }
 
 const ModernTemplate = ({ resumeData, sectionOrder }: Props) => {
-  const { personalInfo, experience, education, skills } = resumeData;
+  const { personalInfo, experience, projects, education, skills } = resumeData;
 
   return (
     <div
@@ -75,6 +75,54 @@ const ModernTemplate = ({ resumeData, sectionOrder }: Props) => {
                             <span style={{ marginRight: "6pt" }}>•</span><span>{bullet}</span>
                           </li>
                         ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+        if (section === "projects" && projects.length > 0) {
+          return (
+            <div key="projects" style={{ marginBottom: "14pt" }}>
+              <SectionHeader>Projects</SectionHeader>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10pt" }}>
+                {projects.map((proj) => (
+                  <div key={proj.id}>
+
+                    {/* Title + Links */}
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="font-semibold" style={{ fontSize: "10.5pt" }}>
+                          {proj.title || "Project Title"}
+                        </span>
+
+                        {/* Tech Stack */}
+                        {proj.techStack && (
+                          <p style={{ color: "#2563eb", fontSize: "9.5pt", fontWeight: 500 }}>
+                            {proj.techStack}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Links */}
+                      <span style={{ fontSize: "8.5pt", color: "#888" }}>
+                        {[proj.link, proj.github].filter(Boolean).join(" | ")}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    {proj.description.filter((d) => d.trim()).length > 0 && (
+                      <ul style={{ marginTop: "3pt", paddingLeft: "0" }}>
+                        {proj.description
+                          .filter((d) => d.trim())
+                          .map((bullet, idx) => (
+                            <li key={idx} className="flex" style={{ marginBottom: "1pt", color: "#444" }}>
+                              <span style={{ marginRight: "6pt", color: "#2563eb" }}>•</span>
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
                       </ul>
                     )}
                   </div>

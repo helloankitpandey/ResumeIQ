@@ -13,7 +13,7 @@ interface Props {
 }
 
 const MinimalTemplate = ({ resumeData, sectionOrder }: Props) => {
-  const { personalInfo, experience, education, skills } = resumeData;
+  const { personalInfo, experience, projects, education, skills } = resumeData;
 
   return (
     <div
@@ -76,6 +76,52 @@ const MinimalTemplate = ({ resumeData, sectionOrder }: Props) => {
             </div>
           );
         }
+
+        if (section === "projects" && projects.length > 0) {
+          return (
+            <div key="projects" style={{ marginBottom: "20pt" }}>
+              <SectionHeader>Projects</SectionHeader>
+              <div style={{ display: "flex", flexDirection: "column", gap: "14pt" }}>
+                {projects.map((proj) => (
+                  <div key={proj.id}>
+
+                    {/* Title + Links */}
+                    <div className="flex justify-between items-baseline" style={{ marginBottom: "2pt" }}>
+                      <span style={{ fontWeight: 500, color: "#111" }}>
+                        {proj.title || "Project Title"}
+                      </span>
+                      <span style={{ fontSize: "8.5pt", color: "#aaa" }}>
+                        {[proj.link, proj.github].filter(Boolean).join(" | ")}
+                      </span>
+                    </div>
+
+                    {/* Tech Stack */}
+                    {proj.techStack && (
+                      <p style={{ fontSize: "9pt", color: "#888", marginBottom: "4pt" }}>
+                        {proj.techStack}
+                      </p>
+                    )}
+
+                    {/* Description */}
+                    {proj.description.filter((d) => d.trim()).length > 0 && (
+                      <ul style={{ paddingLeft: "0" }}>
+                        {proj.description
+                          .filter((d) => d.trim())
+                          .map((bullet, idx) => (
+                            <li key={idx} className="flex" style={{ marginBottom: "2pt", color: "#555" }}>
+                              <span style={{ marginRight: "8pt", color: "#ccc" }}>—</span>
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
         if (section === "education" && education.length > 0) {
           return (
             <div key="education" style={{ marginBottom: "20pt" }}>

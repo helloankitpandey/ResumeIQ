@@ -13,7 +13,7 @@ interface Props {
 }
 
 const JakesTemplate = ({ resumeData, sectionOrder }: Props) => {
-  const { personalInfo, experience, education, skills } = resumeData;
+  const { personalInfo, experience, projects, education, skills } = resumeData;
 
   return (
     <div
@@ -61,7 +61,7 @@ const JakesTemplate = ({ resumeData, sectionOrder }: Props) => {
       </div>
 
       {/* Thick horizontal rule */}
-      <hr style={{ borderTop: "2px solid black", margin: "2pt 0 8pt 0" }} />
+      {/* <hr style={{ borderTop: "2px solid black", margin: "2pt 0 8pt 0" }} /> */}
 
       {sectionOrder.map((section) => {
         if (section === "summary" && personalInfo.summary) {
@@ -127,6 +127,59 @@ const JakesTemplate = ({ resumeData, sectionOrder }: Props) => {
             </div>
           );
         }
+
+        if (section === "projects" && projects.length > 0) {
+          return (
+            <div key="projects" style={{ marginBottom: "8pt" }}>
+              <SectionHeader>Projects</SectionHeader>
+              <div style={{ display: "flex", flexDirection: "column", gap: "6pt" }}>
+                {projects.map((proj) => (
+                  <div key={proj.id}>
+                    {/* Title + Links */}
+                    <div className="flex justify-between items-baseline">
+                      <span className="font-bold" style={{ fontSize: "10.5pt" }}>
+                        {proj.title || "Project Title"}
+                      </span>
+                      <span style={{ fontSize: "9pt", color: "#444" }}>
+                        {proj.link && (
+                          <a className="underline mr-2" style={{ color: "#0000EE" }}>
+                            Live
+                          </a>
+                        )}
+                        {proj.github && (
+                          <a className="underline" style={{ color: "#0000EE" }}>
+                            GitHub
+                          </a>
+                        )}
+                      </span>
+                    </div>
+
+                    {/* Tech Stack */}
+                    {proj.techStack && (
+                      <div className="italic" style={{ fontSize: "10pt" }}>
+                        {proj.techStack}
+                      </div>
+                    )}
+
+                    {/* Description bullets */}
+                    {proj.description.filter((d) => d.trim()).length > 0 && (
+                      <ul style={{ marginTop: "3pt", paddingLeft: "16pt", listStyleType: "disc" }}>
+                        {proj.description
+                          .filter((d) => d.trim())
+                          .map((bullet, idx) => (
+                            <li key={idx} style={{ fontSize: "10pt", marginBottom: "1pt", color: "#222" }}>
+                              {bullet}
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
         if (section === "skills" && skills.length > 0) {
           return (
             <div key="skills" style={{ marginBottom: "8pt" }}>

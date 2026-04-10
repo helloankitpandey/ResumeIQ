@@ -13,12 +13,13 @@ import TechnicalTemplate from "./templates/TechnicalTemplate";
 
 const ResumePreview = () => {
   const { resumeData, selectedTemplate, sectionOrder } = useResume();
-  const { personalInfo, experience, education, skills } = resumeData;
+  const { personalInfo, experience, projects, education, skills } = resumeData;
 
   const hasContent =
     personalInfo.name ||
     personalInfo.email ||
     experience.length > 0 ||
+    projects.length > 0 ||
     education.length > 0 ||
     skills.length > 0;
 

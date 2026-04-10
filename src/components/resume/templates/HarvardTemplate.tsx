@@ -13,7 +13,7 @@ interface Props {
 }
 
 const HarvardTemplate = ({ resumeData, sectionOrder }: Props) => {
-  const { personalInfo, experience, education, skills } = resumeData;
+  const { personalInfo, experience, projects, education, skills } = resumeData;
 
   return (
     <div
@@ -102,6 +102,53 @@ const HarvardTemplate = ({ resumeData, sectionOrder }: Props) => {
             </div>
           );
         }
+
+        if (section === "projects" && projects.length > 0) {
+          return (
+            <div key="projects" style={{ marginBottom: "12pt" }}>
+              <SectionHeader>PROJECTS</SectionHeader>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10pt" }}>
+                {projects.map((proj) => (
+                  <div key={proj.id}>
+
+                    {/* Title */}
+                    <span className="font-bold" style={{ fontSize: "10.5pt" }}>
+                      {proj.title || "Project Title"}
+                    </span>
+
+                    {/* Tech Stack */}
+                    {proj.techStack && (
+                      <p className="italic" style={{ color: "#444" }}>
+                        {proj.techStack}
+                      </p>
+                    )}
+
+                    {/* Links */}
+                    {(proj.link || proj.github) && (
+                      <p style={{ fontSize: "9pt", color: "#666" }}>
+                        {[proj.link, proj.github].filter(Boolean).join(" • ")}
+                      </p>
+                    )}
+
+                    {/* Description */}
+                    {proj.description.filter((d) => d.trim()).length > 0 && (
+                      <ul style={{ marginTop: "3pt", paddingLeft: "16pt", listStyleType: "disc" }}>
+                        {proj.description
+                          .filter((d) => d.trim())
+                          .map((bullet, idx) => (
+                            <li key={idx} style={{ marginBottom: "1pt", color: "#333" }}>
+                              {bullet}
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
         if (section === "skills" && skills.length > 0) {
           return (
             <div key="skills" style={{ marginBottom: "12pt" }}>

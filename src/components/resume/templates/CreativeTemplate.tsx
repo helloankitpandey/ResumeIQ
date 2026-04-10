@@ -13,7 +13,7 @@ interface Props {
 }
 
 const CreativeTemplate = ({ resumeData, sectionOrder }: Props) => {
-  const { personalInfo, experience, education, skills } = resumeData;
+  const { personalInfo, experience, projects, education, skills } = resumeData;
 
   return (
     <div className="flex min-h-full" style={{ fontFamily: "'Poppins', 'Helvetica Neue', sans-serif", fontSize: "10pt", lineHeight: "1.4" }}>
@@ -89,6 +89,60 @@ const CreativeTemplate = ({ resumeData, sectionOrder }: Props) => {
                           <span style={{ marginRight: "4pt", color: "#a78bfa" }}>›</span><span>{bullet}</span>
                         </li>
                       ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {projects.length > 0 && (
+          <div style={{ marginBottom: "16pt" }}>
+            <SectionHeader>Projects</SectionHeader>
+            <div style={{ display: "flex", flexDirection: "column", gap: "10pt" }}>
+              {projects.map((proj) => (
+                <div
+                  key={proj.id}
+                  style={{
+                    borderLeft: "2px solid #ddd6fe",
+                    paddingLeft: "10pt",
+                  }}
+                >
+                  {/* Title */}
+                  <span className="font-semibold" style={{ fontSize: "10.5pt" }}>
+                    {proj.title || "Project Title"}
+                  </span>
+
+                  {/* Tech Stack */}
+                  {proj.techStack && (
+                    <p style={{ color: "#6d28d9", fontSize: "9pt", fontWeight: 500 }}>
+                      {proj.techStack}
+                    </p>
+                  )}
+
+                  {/* Links */}
+                  {(proj.link || proj.github) && (
+                    <p style={{ fontSize: "8pt", color: "#999", marginBottom: "3pt" }}>
+                      {[proj.link, proj.github].filter(Boolean).join(" • ")}
+                    </p>
+                  )}
+
+                  {/* Description */}
+                  {proj.description.filter((d) => d.trim()).length > 0 && (
+                    <ul style={{ paddingLeft: "0" }}>
+                      {proj.description
+                        .filter((d) => d.trim())
+                        .map((bullet, idx) => (
+                          <li
+                            key={idx}
+                            className="flex"
+                            style={{ marginBottom: "1pt", color: "#555" }}
+                          >
+                            <span style={{ marginRight: "4pt", color: "#a78bfa" }}>›</span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
                     </ul>
                   )}
                 </div>

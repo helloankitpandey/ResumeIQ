@@ -16,12 +16,13 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useResume, ResumeSection } from "@/contexts/ResumeContext";
-import { GripVertical, FileText, Briefcase, GraduationCap, Wrench } from "lucide-react";
+import { GripVertical, FileText, Briefcase, GraduationCap, Wrench, Folder } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const sectionLabels: Record<ResumeSection, { label: string; icon: React.ElementType }> = {
   summary: { label: "Professional Summary", icon: FileText },
   experience: { label: "Work Experience", icon: Briefcase },
+  projects: { label: "Projects", icon: Folder },
   education: { label: "Education", icon: GraduationCap },
   skills: { label: "Skills", icon: Wrench },
 };
